@@ -4,19 +4,23 @@ using System;
 using System.Text;
 using System.IO;
 using System.Security.Cryptography;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace BitPayAPI
 {
     public class KeyUtils
     {
+        public readonly Configuration configuration;
+
         private static char[] hexArray = "0123456789abcdef".ToCharArray();
         private static String PRIV_KEY_FILENAME = "bitpay_private.key";
 
 	    public KeyUtils() {}
 
-        public static bool privateKeyExists()
+        public static bool privateKeyExists(string path)
         {
-            return File.Exists(PRIV_KEY_FILENAME);
+            return File.Exists(path);
         }
 
         public static EcKey createEcKey()
@@ -28,7 +32,7 @@ namespace BitPayAPI
         public static EcKey createEcKeyFromHexString(String privateKey)
         {
             BigInteger pkey = new BigInteger(privateKey, 16);
-            EcKey key = new EcKey(pkey, true);
+            EcKey key = new EcKey(pkey);
             return key;
         }
 
@@ -39,9 +43,9 @@ namespace BitPayAPI
             return createEcKeyFromHexString(privateKey);
         }
 
-        public static EcKey loadEcKey()
+        public static EcKey loadEcKey(string path)
         {
-            using (FileStream fs = File.OpenRead(PRIV_KEY_FILENAME))
+            using (FileStream fs = File.OpenRead(path))
             {
                 byte[] b = new byte[1024];
                 fs.Read(b, 0, b.Length);
@@ -69,8 +73,13 @@ namespace BitPayAPI
 
         public static void saveEcKey(EcKey ecKey)
         {
-		    byte[] bytes = ecKey.ToAsn1();
-            FileStream fs = new FileStream(PRIV_KEY_FILENAME, FileMode.Create, FileAccess.Write);
+            saveEcKey(ecKey, PRIV_KEY_FILENAME);
+        }
+
+        public static void saveEcKey(EcKey ecKey,string path)
+        {
+            byte[] bytes = ecKey.ToAsn1();
+            FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write);
             fs.Write(bytes, 0, bytes.Length);
             fs.Close();
         }

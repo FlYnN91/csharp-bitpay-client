@@ -44,10 +44,12 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
@@ -60,6 +62,7 @@
     <Compile Include="BitPay.cs" />
     <Compile Include="BitPayException.cs" />
     <Compile Include="Buyer.cs" />
+    <Compile Include="Configuration.cs" />
     <Compile Include="ECKey.cs" />
     <Compile Include="Invoice.cs" />
     <Compile Include="InvoicePaymentUrls.cs" />
