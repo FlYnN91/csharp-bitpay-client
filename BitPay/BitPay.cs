@@ -29,7 +29,7 @@ namespace BitPayAPI
     {
         private const String BITPAY_API_VERSION = "2.0.0";
         private const String BITPAY_PLUGIN_INFO = "BitPay CSharp Client " + BITPAY_API_VERSION;
-        private const String BITPAY_URL = "https://test.bitpay.com/";
+        private const String BITPAY_URL = "https://bitpay.com/";
 
         public const String FACADE_PAYROLL  = "payroll";
         public const String FACADE_POS = "pos";

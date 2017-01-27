@@ -11,7 +11,6 @@ namespace BitPayAPI
 {
     public class KeyUtils
     {
-        public readonly Configuration configuration;
 
         private static char[] hexArray = "0123456789abcdef".ToCharArray();
         private static String PRIV_KEY_FILENAME = "bitpay_private.key";
