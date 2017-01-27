@@ -16,6 +16,10 @@ namespace BitPayAPI
 	    public const String EXSTATUS_PAID_OVER = "paidOver";
         public const String EXSTATUS_PAID_PARTIAL = "paidPartial";
 
+        public const String SPEED_HIGH = "high";
+        public const String SPEED_MEDIUM = "medium";
+        public const String SPEED_LOW = "low";
+
         /// <summary>
         /// Creates an uninitialized invoice request object.
         /// </summary>

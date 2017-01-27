@@ -5,11 +5,13 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Helpers;
 using System.Web.Script.Serialization;
 
@@ -244,17 +246,21 @@ namespace BitPayAPI
 
         private void initKeys()
         {
-            if (KeyUtils.privateKeyExists())
-            {
-                _ecKey = KeyUtils.loadEcKey();
+            string path = HttpContext.Current.Server.MapPath("~/App_Start/bitpay_private.key");
 
-                // Alternatively, load your private key from a location you specify.
-                //_ecKey = KeyUtils.createEcKeyFromHexStringFile("C:\\Users\\Andy\\Documents\\private-key.txt");
+            if (KeyUtils.privateKeyExists(path))
+            {
+                _ecKey = KeyUtils.loadEcKey(path);
+
+               //  Alternatively, load your private key from a location you specify.
+                //_ecKey = KeyUtils.createEcKeyFromHexStringFile(path);
             }
             else
             {
+
+                
                 _ecKey = KeyUtils.createEcKey();
-                KeyUtils.saveEcKey(_ecKey);
+                KeyUtils.saveEcKey(_ecKey, path);
             }
         }
 
